@@ -39,5 +39,14 @@ class TestLogin(unittest.TestCase):
         test_login.save_login()
         self.assertEqual(len(Login.login),2)   
 
+    def test_login_exists(self):
+            '''
+        test to check if we can return a Boolean if we cannot find the login.
+        '''
+        self.new_login.save_login()
+        test_login = Login("Test","login","lilo89","lilo89")#new user
+        test_login.save_login()
+        login_exists = Login.login_exist("0701234567")
+        self.assertTrue(login_exists)
 
 

@@ -12,16 +12,16 @@ class TestLogin(unittest.TestCase):
             '''
         Set up method to run before each test cases.
         '''
-        self.new_login = Login("lilomuso","lilo89","lilo89","lilo89") # create login object
+        self.new_login = Login("instagram","lilo","muso","lilomuso","lilo89") # create login object
     def test_init(self):
         '''
         test_init test case to test if the object is initialized properly
         '''
-
+        self.assertEqual(self.new_login.social,"instagram")
+        self.assertEqual(self.new_login.firstname,"lilo")
+        self.assertEqual(self.new_login.lastname,"muso")
         self.assertEqual(self.new_login.username,"lilomuso")
         self.assertEqual(self.new_login.password,"lilo89")
-        self.assertEqual(self.new_login.new_password,"lilo89")
-        self.assertEqual(self.new_login.confirm_password,"lilo89")
 
     def test_save_login(self):
         '''
@@ -35,7 +35,7 @@ class TestLogin(unittest.TestCase):
         test_save_multiple_login to check if we can save multiple login object to our user
         '''
         self.new_login.save_login()
-        test_login = Login("Test","login","lilo89","lilo89")#new login
+        test_login = Login("Test","login","lilo89")#new login
         test_login.save_login()
         self.assertEqual(len(Login.login),2)   
 
@@ -44,9 +44,20 @@ class TestLogin(unittest.TestCase):
         test to check if we can return a Boolean if we cannot find the login.
         '''
         self.new_login.save_login()
-        test_login = Login("Test","login","lilo89","lilo89")#new user
+        test_login = Login("Test","login","lilo89")#new user
         test_login.save_login()
-        login_exists = Login.login_exist("0701234567")
+        login_exists = Login.login_exist("lilo89")
         self.assertTrue(login_exists)
+
+     def test_display_all_login(self):
+        '''
+        method that returns a list of all logins saved saved
+        '''
+        self.assertEqual(User.display_login(),Login.login)
+
+
+if __name__ == '__main__':
+        unittest.main()
+
 
 

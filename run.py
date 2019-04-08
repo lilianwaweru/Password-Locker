@@ -1,19 +1,20 @@
 #!/usr/bin/env python3.6
 from user import User
 from login import Login
+import random
 
-def create_user(fname,lname,phone,email):
+def create_user(fname,lname,phone,email,username,password):
     '''
     function to create new user
     '''
-    new_user = User(fname,lname,phone,email)
+    new_user = User(fname,lname,phone,email,username,password)
     return new_user
 
-def create_login(username,password,npassword,cpassword):
+def create_login(social, firstname, lastname, username,password):
     '''
     function to create new login
     '''
-    new_login = Login(username,password,npassword,cpassword)
+    new_login = Login(username,password)
     return new_login
 
 def save_user(user):
@@ -46,6 +47,13 @@ def check_existing_user(number):
     '''
     return User.user_exist(number)
 
+def check_existing_login(password):
+    '''
+    function that checks if a user exists with that number and return a boolean
+    '''
+    return Login.login_exist(password)
+
+
 def display_user():
     '''
     Function that returns all the saved users
@@ -54,60 +62,115 @@ def display_user():
 
 def main():
     print("Hello,welcome to password locker.what is your name?")
-            user_name = input()
-            print(f"Hello{user_name}.what would you like to do?")
-            print('\n')
-            while True:
-                    print("use these short codes : cc - create a new user, dc - display user, fc - find a user, ex - exit the user")
-                    short_code = input().lower()
-                    if short_code == 'cc':
-                            print("New User")
-                            print("-"*10)
+    user_name = input()
+    print(f"Hello{user_name}.what would you like to do?")
+    print('\n')
+    while True:
+        print("use these short codes : cc - create a new user, li - login, dc - display user, fc - find a user, ex - exit the user")
+        short_code = input().lower()
+        if short_code == 'cc':
+            print("New User")
+            print("-"*10)
+            f_name = input()
+            print("first name....")
+            l_name = input()
+            print("Last name....")
+            p_number = input()
+            print("phone number....")
+            e_address = input()
+            print("email address....")
+            username = input()
+            print("username....")
+            password = input()
+            print("password....")
+            save_user(create_user(f_name,l_name,p_number,e_address))#create and save new user
+            print ('\n')
+            print(f"New User {f_name} {l_name} created successfully")
+            print ('\n')
 
-                            print("first name....")
-                            f_name = input()
-
-                            print("Last name....")
-                            l_name = input()
-
-                            print("phone number....")
-                            p_number = input()
-
-                            print("email address....")
-                            e_address = input()
-
-                            save_user(create_user(f_name,l_name,p_number,e_address))#create and save new user
-                            print ('\n')
-                            print(f"New User {f_name} {l_name} created")
-                            print ('\n')
-                    elif short_code == 'dc':
-                            if display_user():
-                                    print("Here is a list of all your user")
-                                    print('\n')
-                                    for user in display_user()
-                                         print(f"{user.first_name} {user.last_name}.....{user.phone_number}")
-                                    print('\n')
-                            else:
-                                    print('\n')
-                                    print("You don't seem to have any user saved yet")
-                                    print('\n')
-
-                    elif short_code == 'fc':
-                            print("Enter the number you want to search for")
-                            search_number = input()
-                            if check_existing_user(search_number):
-                                search_user = find_user(search_number)
-                                print(f"{search_user.first_name} {search_user.last_name}")
-                                print('-'*20)
-
-                                print(f"phone number.......{search_user.phone_number}")
-                                print(f"Email address.......{search_user.email}")
-                            
-                            else:
-                                print("That user does not exist")
-                    elif short_code == "ex":
-                        print("Bye......")
-                        break
+        elif short_code == 'li':
+            print("New Login")
+            print("-"*10)
+            print("username....")
+            username = input()
+            print("password")
+            password = input()
+            if check_existing_login(password):
+                print("Welcome Back")
+                print ('\n')
+                print(f"New Login {username} {password} login successfull")
+                print ('\n')
+                social = input()
+                print("Enter social media you want to create")
+                print ('\n')
+                firstname = input()
+                print("Enter your firstname")
+                print ('\n')
+                lastname = input()
+                print("Enter your lastname")
+                print ('\n')
+                username = input()
+                print("Enter your username")
+                print ('\n')
+                print("You can press gp - to generate a password or cp - to create your own password")
+                print ('\n')
+                password_choice = input()
+                if password_choice == 'gp':
+                    symbols = "abcdefghijklmonpqrstuvwxyz0123456789"
+                    password = "".join(random.choice(symbols) for _ in range(9))
+                    print(f"Here is your password{password}")
+                    print('\n')
+                elif password_choice == 'cp':
+                    print("Enter Password")
+                    print('\n')
+                    password = input()
+                    save_login(create_login(social, firstname, lastname, username,password))   
+                    print('\n')       
+                    print(f"{social} account has been created successfully")
+            else:
+                    print("You entered wrong account details")
+                    print('\n')
+                    print("-"*10)
+                    print('\n')
+                    firstname = input()
+                    print("Re-enter firstname")
+                    print('\n')
+                    print("-"*10)
+                    lastname = input()
+                    print("Re-enter lastname")
+                    print('\n')
+                    print("-"*10)
+                    username = input()
+                    print("Re-enter username")
+                    print('\n')
+                    print("-"*10)
+                    password = input()
+                    print("Re-enter password")
+                    print('\n')
+                    print("-"*10)
+                    if check_existing_login(password):
+                        print(f"Login successfully for{username}")
                     else:
-                         print("I really didn't get that.please use the short codes")
+                        print(f"you dont have an account")
 
+        elif short_code == 'dc':
+            if display_user():
+
+                print('\n')
+                print("Your Current user accounts are:")
+                print("*"*10)
+                for user in display_user():
+                    print(f" Social Media {user.social} \n First Name: {user.first_name} \n Second Name: {user.last_name} \n Username: {user.username} \nPassword {user.password}")
+
+            else:
+                print('\n')
+                print("You dont have any account")
+        elif short_code == "ex":
+                    print("Bye .......")
+                    break
+        else:
+            print("I really didn't get that. Please use the short codes")
+
+            
+if __name__ == '__main__':
+    main()

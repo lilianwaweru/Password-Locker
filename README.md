@@ -9,6 +9,12 @@ Use the following commands to use this project.
 Install python3
 Git clone https://github.com/lilianwaweru/Password-Locker.git
 cd password-locker
+To run this project in your local machine
+
+Give executable rights to the run.py file by running chmod +x run.py on the terminal
+Run ./run.py to start interacting with the program.
+
+## BDD
 
 
 
@@ -16,14 +22,7 @@ cd password-locker
 ## Known Bugs
 No bugs are reported so far. Noticed any bug? KIndly contact me on lilowesh.lw@gmail.com
 ## Technologies Used
-1.javascript
-
-2.css
-
-3.html
-
-## Link to the site
-Click on this link for the live demo https://lilianwaweru.github.io/Pig-Dice/
+python3
 
 ## Support and contact details
 you can contact via slack at lilian waweru

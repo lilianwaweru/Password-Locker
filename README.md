@@ -15,7 +15,12 @@ Give executable rights to the run.py file by running chmod +x run.py on the term
 Run ./run.py to start interacting with the program.
 
 ## BDD
-
+| BEHAVIOUR                                                          | OUTPUT                                                                                  |
+|--------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| when you interact with the application,it will ask for your inputs | when you input,you will have an option for creating an account and login                |
+| when you chose create new account                                  | it will ask for your inputs                                                             |
+| if you input wrong details                                         | it will inform you that you have inputted the wrong details so you reenter your details |
+| if you choose to generate a password                               | it will generate a password for you                                                     |
 
 
 

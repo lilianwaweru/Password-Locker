@@ -30,15 +30,22 @@ class TestLogin(unittest.TestCase):
         self.new_login.save_login()#saving the new user
         self.assertEqual(len(Login.login),1)
 
+
+        def tearDown(self):
+            '''
+        tearDown method that does clean up after each test case has run.
+        '''
+        Login.login=[]
+
     def test_save_multiple_login(self):
         '''
-        test_save_multiple_login to check if we can save multiple login object to our user
+        test_save_multiple_login to check if we can save multiple login object to our login
         '''
         self.new_login.save_login()
-        test_login = Login("Test","login","lilo89")#new login
+        test_login = Login("Test","user","0701234567","lilo.lw@.com")
         test_login.save_login()
-        self.assertEqual(len(Login.login),2)   
-
+        self.assertEqual(len(Login.login),2)
+        
     def test_login_exists(self):
             '''
         test to check if we can return a Boolean if we cannot find the login.

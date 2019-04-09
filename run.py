@@ -66,7 +66,7 @@ def main():
     print(f"Hello{user_name}.what would you like to do?")
     print('\n')
     while True:
-        print("use these short codes : ca - create a new account,cc - create credentials li - login, dc - display user, fc - find a user, ex - exit the user")
+        print("use these short codes : ca - create a new account,cc - create credentials li - login, dc - display login, fc - find a user, ex - exit the user")
         short_code = input().lower()
         if short_code == 'ca':
             # print("New User")
